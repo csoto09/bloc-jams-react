@@ -14,6 +14,7 @@ class Album extends Component {
       album: album,
       currentSong: album.songs[0],
       currentTime: 0,
+
       duration: album.songs[0].duration,
       isPlaying: false,
       isTarget: null
@@ -21,6 +22,8 @@ class Album extends Component {
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+    
+
   }
     componentDidMount() {
       this.eventListeners = {
@@ -29,10 +32,14 @@ class Album extends Component {
         },
         durationchange: e => {
           this.setState({ duration:this.audioElement.duration });
-        }
+        },
+        // volumechange: e => {
+        //   this.setState({ volume: this.audioElement.volume});
+        // }
       }
       this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
       this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
+      // this.audioElement.addEventListener('volumechange', this.eventListeners.volumechange);
     }
 
   play() {
@@ -49,11 +56,6 @@ class Album extends Component {
     this.audioElement.src = null;
     this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
     this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchange);
-  }
-
-  setSong(song) {
-    this.audioElement.src = song.audioSrc;
-    this.setState({ currentSong: song });
   }
 
   setSong(song) {
@@ -100,6 +102,10 @@ class Album extends Component {
     this.setState({isTarget:null});
   }
 
+  handleVolumeChange(e) {
+    this.audioElement.volume = e.target.value
+  }
+
   displayIcon(song,index) {
     if (this.state.isTarget === song) {
       return <span className="ion-ios-play"></span>
@@ -110,6 +116,13 @@ class Album extends Component {
     } else {
       return index + 1
     }
+  }
+
+  formatTime(time) {
+    let mins = Math.floor(time / 60);
+    let secs = Math.floor(time - (mins*60));
+    if (isNaN(time)) {return "-:--";}
+    return mins + ':' + secs.toString().padStart(2, "0")
   }
 
   render() {
@@ -140,7 +153,7 @@ class Album extends Component {
                     {song.title}
                   </td>
                   <td>
-                    {song.duration}
+                    {this.formatTime(song.duration)}
                   </td>
                 </tr>
               )
@@ -150,12 +163,13 @@ class Album extends Component {
         <PlayerBar 
           isPlaying={this.state.isPlaying} 
           currentSong={this.state.currentSong} 
-          currentTime={this.audioElement.currentTime}
-          duration={this.audioElement.duration}
+          currentTime={this.formatTime(this.audioElement.currentTime)}
+          duration={this.formatTime(this.audioElement.duration)}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)} 
           handlePrevClick={() => this.handlePrevClick()} 
-          handleNextClick={() => this.handleNextClick()} 
+          handleNextClick={() => this.handleNextClick()}
           handleTimeChange={(e) => this.handleTimeChange(e)}
+          handleVolumeChange={(e) => this.handleVolumeChange(e)}
         />
       </section>
     );

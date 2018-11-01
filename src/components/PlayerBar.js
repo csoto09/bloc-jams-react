@@ -19,7 +19,7 @@ class PlayerBar extends Component {
            <div className="current-time">{this.props.currentTime}</div>
            <input 
               type="range" 
-              className="seek-bar" 
+              className="seek-bar custom-range" 
               value={(this.props.currentTime/this.props.duration) || 0} 
               max="1"
               min="0"
@@ -32,7 +32,7 @@ class PlayerBar extends Component {
            <span className="icon ion-ios-volume-low"></span>
            <input 
               type="range" 
-              className="seek-bar" 
+              className="seek-bar custom-range" 
               value={this.props.volume}
               max="1"
               min="0"

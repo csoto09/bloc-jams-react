@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import albumData from './../data/albums';
+import "./Library.css";
 
 
 class Library extends Component {
@@ -11,7 +12,7 @@ class Library extends Component {
 
   render() {
     return (
-      <section className="library">
+      <section className="library jumbotron">
         {
           this.state.albums.map( (album, index) =>
             <Link to={`/album/${album.slug}`} key={index}>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
+import "./Album.css";
 
 class Album extends Component {
   constructor(props) {
@@ -127,7 +128,7 @@ class Album extends Component {
 
   render() {
     return (
-      <section className="album">
+      <section className="album jumbotron text-dark">
         <section id="album-info">
           <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
           <div className="album-details">
@@ -136,7 +137,8 @@ class Album extends Component {
             <div id="release-info">{this.state.album.releaseInfo}</div>
           </div>
         </section>
-        <table id="song-list">
+        <section id="song-list">
+        <table className="table">
           <colgroup>
             <col id="song-number-column"/>
             <col id="song-title-column"/>
@@ -160,6 +162,7 @@ class Album extends Component {
             }
           </tbody>
         </table>
+        </section>
         <PlayerBar 
           isPlaying={this.state.isPlaying} 
           currentSong={this.state.currentSong} 

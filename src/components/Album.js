@@ -166,13 +166,14 @@ class Album extends Component {
         <PlayerBar 
           isPlaying={this.state.isPlaying} 
           currentSong={this.state.currentSong} 
-          currentTime={this.formatTime(this.audioElement.currentTime)}
-          duration={this.formatTime(this.audioElement.duration)}
+          currentTime={this.audioElement.currentTime}
+          duration={this.audioElement.duration}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)} 
           handlePrevClick={() => this.handlePrevClick()} 
           handleNextClick={() => this.handleNextClick()}
           handleTimeChange={(e) => this.handleTimeChange(e)}
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
+          formatTime={(time) => this.formatTime(time)}
         />
       </section>
     );

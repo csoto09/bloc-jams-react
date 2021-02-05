@@ -4,12 +4,12 @@
   "private": true,
   "dependencies": {
     "merge": ">=1.2.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^3.4.3",
-    "set-value": "^3.0.2",
-    "serialize-javascript": ">=3.1.0"
+    "react-scripts": "^4.0.2",
+    "serialize-javascript": ">=3.1.0",
+    "set-value": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
